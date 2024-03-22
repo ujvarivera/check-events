@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, TextArea, TextField } from '@radix-ui/themes'
+import { Button, Callout, TextArea, TextField } from '@radix-ui/themes'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
@@ -13,6 +13,7 @@ interface EventForm {
 
 const CreateNewEvent = () => {
   const router = useRouter();
+  const [error, setError] = useState('');
 
   const {
     register,
@@ -20,24 +21,39 @@ const CreateNewEvent = () => {
   } = useForm<EventForm>();
 
   const onSubmit: SubmitHandler<EventForm> = async (data) => {
-    await axios.post('/api/events', data);
-    router.push('/events');
+    try {
+      await axios.post('/api/events', data);
+      router.push('/events');
+    } catch (error) {
+      setError('Unexpected error');
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='max-w-xl space-y-3'>
-      <TextField.Root>
-        <TextField.Input
-          placeholder="Name of the Event"
-          {...register('title')}
+    <div className='max-w-xl '>
+      {
+        error &&
+        <Callout.Root color='red' className='mb-5'>
+          <Callout.Text>
+            {error}
+          </Callout.Text>
+        </Callout.Root>
+      }
+
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-3'>
+        <TextField.Root>
+          <TextField.Input
+            placeholder="Name of the Event"
+            {...register('title')}
+          />
+        </TextField.Root>
+        <TextArea
+          placeholder='Description'
+          {...register('description')}
         />
-      </TextField.Root>
-      <TextArea
-        placeholder='Description'
-        {...register('description')}
-      />
-      <Button>Save</Button>
-    </form>
+        <Button>Save</Button>
+      </form>
+    </div>
   )
 }
 
