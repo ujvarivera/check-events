@@ -14,7 +14,19 @@ const EventsPage = () => {
             setEvents(data);
         }
         getEvents()
-    }, []);
+    }, [events]);
+
+    const handleDelete = async(eventId:String) => {
+        const isConfirmed = confirm("Are you sure that you want to delete this event?");
+
+        if (isConfirmed) {
+            try {
+                await axios.delete(`/api/events/${eventId}`)
+            } catch (error) {
+                
+            }
+        }
+     };
 
     return (
         <div>
@@ -26,9 +38,9 @@ const EventsPage = () => {
             <div className='space-y-2 mt-5'>
                 {events &&
                     events.map(event =>
-                        <div>
-                            <Link href={`/events/${event.id}`} key={event.id}>{event.title}</Link>
-                            <Button className='ml-4'>X</Button>
+                        <div key={event.id}>
+                            <Link href={`/events/${event.id}`}>{event.title}</Link>
+                            <Button className='ml-4' onClick={() => handleDelete(event.id)}>X</Button>
                         </div>
                     )
                 }
