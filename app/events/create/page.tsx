@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createEventSchema } from '../../validationSchemas';
 import { z } from 'zod';
 import ErrorMessage from '../../components/ErrorMessage';
+import Spinner from '../../components/Spinner';
 
 type EventForm = z.infer<typeof createEventSchema>
 
@@ -22,6 +23,7 @@ interface EventForm {
 const CreateNewEvent = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -33,9 +35,11 @@ const CreateNewEvent = () => {
 
   const onSubmit: SubmitHandler<EventForm> = async (data) => {
     try {
+      setIsSubmitting(true);
       await axios.post('/api/events', data);
       router.push('/events');
     } catch (error) {
+      setIsSubmitting(false);
       setError('Unexpected error');
     }
   }
@@ -57,7 +61,10 @@ const CreateNewEvent = () => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Save</Button>
+        <Button disabled={isSubmitting}>
+          Save 
+          { isSubmitting && <Spinner/> }
+        </Button>
       </form>
     </div>
   )
