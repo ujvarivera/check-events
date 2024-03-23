@@ -3,6 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/client";
 import { createEventSchema } from "../../validationSchemas";
 
+export async function GET(request: NextRequest) {
+    const events = await prisma.event.findMany()
+
+    return NextResponse.json(events);
+}
+
 export async function POST(request: NextRequest) {
     const body = await request.json();
     const validation = createEventSchema.safeParse(body);
