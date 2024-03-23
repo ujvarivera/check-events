@@ -4,6 +4,7 @@ import { Button } from '@radix-ui/themes'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import EventCard from '../components/EventCard'
 
 const EventsPage = () => {
     const [events, setEvents] = useState([]);
@@ -29,18 +30,22 @@ const EventsPage = () => {
      };
 
     return (
-        <div>
+        <div className='mx-4'>
             <Button>
                 <Link href="/events/create">
                     New Event
                 </Link>
             </Button>
-            <div className='space-y-2 mt-5'>
+            <div className='mt-5 grid md:grid-cols-5 place-items-stretch gap-4'>
                 {events &&
                     events.map(event =>
                         <div key={event.id}>
-                            <Link href={`/events/${event.id}`}>{event.title}</Link>
-                            <Button className='ml-4' onClick={() => handleDelete(event.id)}>X</Button>
+                            <EventCard 
+                            eventId={event.id} 
+                            title={event.title} 
+                            description={event.description}
+                            handleDelete={handleDelete}
+                            />
                         </div>
                     )
                 }
