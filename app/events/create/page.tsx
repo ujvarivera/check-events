@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createEventSchema } from '../../validationSchemas';
 import { z } from 'zod';
+import ErrorMessage from '../../components/ErrorMessage';
 
 type EventForm = z.infer<typeof createEventSchema>
 
@@ -48,17 +49,13 @@ const CreateNewEvent = () => {
             {...register('title')}
           />
         </TextField.Root>
-        { errors.title &&
-          <Text color="red" as='p'>{errors.title.message}</Text>
-        }
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
         <TextArea
           placeholder='Description'
           {...register('description')}
         />
-        { errors.description &&
-          <Text color="red" as='p'>{errors.description.message}</Text>
-        }
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button>Save</Button>
       </form>
