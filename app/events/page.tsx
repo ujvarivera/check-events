@@ -28,6 +28,7 @@ const EventsPage = () => {
                     events.map(event =>
                         <div>
                             <Link href={`/events/${event.id}`} key={event.id}>{event.title}</Link>
+                            <Button className='ml-4'>X</Button>
                         </div>
                     )
                 }

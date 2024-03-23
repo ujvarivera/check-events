@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Button } from '@radix-ui/themes';
+import Link from 'next/link';
 
 const Event = ({ params: { eventId } }) => {
   const [event, setEvent] = useState({});
@@ -19,6 +21,11 @@ const Event = ({ params: { eventId } }) => {
       {
         event &&
         <>
+          <Button>
+            <Link href={`/events/${eventId}/edit`}>
+                Edit
+            </Link>
+          </Button>
           <div>{event.title}</div>
           <div>{event.description}</div>
         </>
