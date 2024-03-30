@@ -26,4 +26,5 @@ model Event {
   updatedAt   DateTime @updatedAt
   title       String
   description String?  @db.Text()
+  image String?  @db.Text()
 }
