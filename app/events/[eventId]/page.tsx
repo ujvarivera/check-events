@@ -26,6 +26,14 @@ const Event = ({ params: { eventId } }) => {
                 Edit
             </Link>
           </Button>
+          <img src={event.image} alt="Picture of Event" 
+            style={{
+              display: 'block',
+              objectFit: 'cover',
+              width: '100%',
+              height: 500,
+              backgroundColor: 'var(--gray-5)',
+          }}/>
           <div>{event.title}</div>
           <div>{event.description}</div>
         </>

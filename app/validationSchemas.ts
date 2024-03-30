@@ -3,7 +3,7 @@ import { z } from 'zod';
 const ACCEPTED_IMAGE_MIME_TYPES = [
     "image/jpeg",
     "image/jpg",
-    "image/png",
+    //"image/png",
 ];
 
 export const createEventSchema = z.object({
@@ -12,6 +12,6 @@ export const createEventSchema = z.object({
     // file: z.instanceof(File)
     file: z.any().refine(
         (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
-        "Only .jpg, .jpeg and.png formats are supported."
+        "Only .jpg and .jpeg formats are supported."
     ),
 });

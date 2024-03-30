@@ -44,6 +44,7 @@ const EventsPage = () => {
                             eventId={event.id} 
                             title={event.title} 
                             description={event.description}
+                            imageUrl={event.image}
                             handleDelete={handleDelete}
                             />
                         </div>

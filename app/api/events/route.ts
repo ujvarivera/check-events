@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
             data: {
               title: formData.get("title"),
               description: formData.get("description"),
-              image: imagePath
+              image: "/events/" + filename
             },
         });
 
