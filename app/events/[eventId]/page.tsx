@@ -36,8 +36,8 @@ const Event = ({ params: { eventId } }) => {
               height: 500,
               backgroundColor: 'var(--gray-5)',
           }}/>
-          <h1 className='text-2xl font-bold py-8 text-center'>{event.title}</h1>
-          <div className='text-xl text-center w-2/3 mb-8'>{event.description}</div>
+          <h1 className='text-2xl font-bold m-8 text-center'>{event.title}</h1>
+          <div className='text-xl mb-8 mx-4'>{event.description}</div>
         </>
       }
     </div>

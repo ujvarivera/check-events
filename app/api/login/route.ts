@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     cookies().set({
         name: 'username',
         value: username,
-        httpOnly: true,
+        // httpOnly: true,
         maxAge: 60*60 // 1 hour
       })
 

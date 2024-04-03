@@ -4,15 +4,17 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import LogoutButton from './components/LogoutButton'
+import useUserData from './hooks/useUserData'
 
 const NavBar = () => {
     const currentPath = usePathname();
+    const { username } = useUserData()
 
     const links = [
-        { name: 'Dashboard', href: '/' },
-        { name: 'Events', href: '/events' },
-        { name: 'Register', href: '/register' },
-        { name: 'Login', href: '/login' },
+        { name: 'Dashboard', href: '/', show: true },
+        { name: 'Events', href: '/events', show: true },
+        { name: 'Register', href: '/register', show: !username },
+        { name: 'Login', href: '/login', show: !username },
     ]
 
     return (
@@ -21,14 +23,14 @@ const NavBar = () => {
             <ul className='flex space-x-6 flex-grow'>
                 {
                     links.map(link =>
-                        <Link href={link.href} key={link.href} className={`${link.href === currentPath && 'font-bold'}  text-blue-500 hover:text-blue-900`}>
+                        <Link href={link.href} key={link.href} className={`${link.href === currentPath && 'font-bold'} ${link.show ? 'visiblie' : 'hidden'} text-blue-500 hover:text-blue-900`}>
                             {link.name}
                         </Link>
                     )
                 }
             </ul>
-
-            <LogoutButton />
+            <p>{ username && username }</p>
+            { username && <LogoutButton /> }
         </nav>
     )
 }

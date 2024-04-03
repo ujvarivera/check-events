@@ -3,6 +3,7 @@ import "./globals.css";
 import '@radix-ui/themes/styles.css';
 import { Theme, ThemePanel } from '@radix-ui/themes';
 import NavBar from './NavBar'
+import { CookiesProvider } from 'next-client-cookies/server';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +17,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Theme appearance="light" accentColor="blue">
-          <NavBar />
-          <main>
-            {children}
-          </main>
+          <CookiesProvider>
+            <NavBar />
+            <main>
+              {children}
+            </main>
+          </CookiesProvider>
         </Theme>
       </body>
     </html>
