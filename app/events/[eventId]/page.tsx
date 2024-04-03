@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Button } from '@radix-ui/themes';
+import { Button, Flex } from '@radix-ui/themes';
 import Link from 'next/link';
 
 const Event = ({ params: { eventId } }) => {
@@ -21,11 +21,13 @@ const Event = ({ params: { eventId } }) => {
       {
         event &&
         <>
-          <Button>
-            <Link href={`/events/${eventId}/edit`}>
-                Edit
-            </Link>
-          </Button>
+          <Flex className='pb-5 pr-2 float-right'>
+            <Button>
+              <Link href={`/events/${eventId}/edit`}>
+                  Edit
+              </Link>
+            </Button>
+          </Flex>
           <img src={event.image} alt="Picture of Event" 
             style={{
               display: 'block',
@@ -34,8 +36,8 @@ const Event = ({ params: { eventId } }) => {
               height: 500,
               backgroundColor: 'var(--gray-5)',
           }}/>
-          <div>{event.title}</div>
-          <div>{event.description}</div>
+          <h1 className='text-2xl font-bold py-8 text-center'>{event.title}</h1>
+          <div className='text-xl text-center w-2/3 mb-8'>{event.description}</div>
         </>
       }
     </div>
