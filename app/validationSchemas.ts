@@ -27,3 +27,8 @@ export const createUserSchema = z.object({
     path: ["confirmPassword"], // path of error
   });
 ;
+
+export const loginUserSchema = z.object({
+    username: z.string().min(1, 'Username is required'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+}); 
