@@ -12,7 +12,7 @@ const NavBar = () => {
 
     const links = [
         { name: 'Dashboard', href: '/', show: true },
-        { name: 'Events', href: '/events', show: true },
+        { name: 'Events', href: '/events', show: !!username },
         { name: 'Register', href: '/register', show: !username },
         { name: 'Login', href: '/login', show: !username },
     ]

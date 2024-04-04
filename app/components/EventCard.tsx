@@ -4,7 +4,7 @@ import React from 'react'
 
 const EventCard = ({eventId, title, description, handleDelete, imageUrl=null}) => {
     return (
-        <Box className='max-w-full hover:scale-110'>
+        <Box className='hover:scale-110'>
             <Card size="2">
                 <Inset clip="padding-box" side="top" pb="current">
                     <img
