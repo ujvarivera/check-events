@@ -36,7 +36,7 @@ const EventsPage = () => {
                     New Event
                 </Link>
             </Button>
-            <div className='mt-5 flex items-center flex-wrap gap-4'>
+            <div className='mt-5 flex items-center justify-center flex-wrap gap-4 overflow-hidden'>
                 {events &&
                     events.map(event =>
                         <div key={event.id}>
